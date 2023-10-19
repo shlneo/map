@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <title>Travel Modes in Directions</title>
+    <link 
+    rel="stylesheet" 
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+  />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script type="text/javascript" >
+        var origin = {{ origin|tojson }};
+        var destination = {{ destination|tojson }};
+        var driving_distance = {{ driving_distance|tojson }};
+        var walking_distance = {{ walking_distance|tojson }};
+        var bicycling_distance = {{ bicycling_distance|tojson }};
+        var transit_distance = {{ transit_distance|tojson }};
+    </script>
+    <script type="module" src="{{ url_for('static', filename='js/index.js') }}"></script>
+  </head>
+  <body>
+
+    <div id="route-panel">
+        <br>
+        <input type = "text" value="{{A}}" style = "width: 270px;" readonly>
+        <br>
+        <input type = "text" value="{{B}}" style = "width: 270px;" readonly>
+        <br>
+         
+        <div id="gg-panel">
+            <div class="route-card" >
+                <h3>Driving</h3>
+                <p>Distance: {{driving_distance}}</p>
+                <p>Duration: {{HrsMinsDurationDriving}}</p>
+            </div>
+        
+
+            <div class="route-card" >
+                <h3>Walking</h3>
+                <p>Distance: {{walking_distance}}</p>
+                <p>Duration: {{HrsMinsDurationWalking}}</p>
+            </div>
+        
+
+            <div class="route-card" >
+                <h3>Bicycling</h3>
+                <p>Distance: {{bicycling_distance}}</p>
+                <p>Duration: {{HrsMinsDurationBicycling}}</p>
+            </div>
+        
+
+            <div class="route-card">
+                <h3>Transit</h3>
+                <p>Distance: {{transit_distance}}</p>
+                <p>Duration: {{HrsMinsDurationTransit}}</p>
+            </div>    
+        </div>
+        <select id="mode" style = "margin-bottom:80px;">
+            <option value="DRIVING">Driving</option>
+            <option value="WALKING">Walking</option>
+            <option value="BICYCLING">Bicycling</option>
+            <option value="TRANSIT">Transit</option>
+        </select> 
+
+    </div>
+    
+    <div id="map"></div>
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=initMap&v=weekly"
+    defer
+  ></script>
+  </body>
+</html>
